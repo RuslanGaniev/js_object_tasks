@@ -13,7 +13,7 @@ let buyer = {
 	buyApples(amount) {
 		let cost = amount * 5;
 		if (this.money < cost) {
-			return console.log("У покупателя недостаточно денег");
+			return console.log("У покупателя недостаточно денег"); // в этой строке кода ошибка
 		}
 		this.money -= cost;
 		this.apples += amount;
