@@ -16,7 +16,7 @@ function transferGold(fromPerson, toPerson) {
 	toPerson.gold = fromPerson.gold,
 	fromPerson.gold = `${Low_Gold}`
 }
-
+это нужно делать в функции вывода сообщения и вызывать её в нужном месте, смысл в том чтобы не писать в глобальной области видимости 
 // Проверяем начальное количество золота у каждого человека
 console.log(`${person1.name} имеет ${person1.gold} золота`);
 console.log(`${person2.name} имеет ${person2.gold} золота`);
