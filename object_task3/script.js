@@ -1,36 +1,27 @@
-let cashRegister = {
-	applePrice: 5,
-	pearPrice: 7.50,
-	breadPrice: 4.30,
-	cashInCashier: 50
+const products = {
+  'яблоко': 5,
+  'груша': 7.5,
+  'хлеб': 4.3
 };
 
-let cashInBuyer = 15;
+let cashierMoney = 50;
+let customerMoney = 15;
 
-function buyProduct(price, label, quantity, cashInBuyer) {
-	let totalPrice = price * quantity;
-
-	if (cashInBuyer < totalPrice) {
-		console.log(`У вас недостаточно денег для покупки ${label}`);
-		return cashInBuyer;
+// функция для покупки
+function buy(product, quantity) {
+	const price = products[product] * quantity;// цена товаров
+		if (customerMoney < price) {
+				console.log('У вас недостаточно денег');
+				return;
 	}
-
-	let change = cashInBuyer - totalPrice;
-	cashRegister.cashInCashier += totalPrice;
-
-	console.log(`Держите деньги ${totalPrice}грн`);
-	console.log(`Вы выбрали ${quantity} ${label}`);
-	console.log(`Вот ваша сдача ${change}грн`);
-	console.log(`Вот ваш чек ${totalPrice}грн`);
-	console.log(`Остаток в кассе: ${cashRegister.cashInCashier}грн`);
-
-	return change;
+	cashierMoney += price; // отнимаем деньги у покупателя
+	customerMoney -= price;// отнимаем деньги у покупателя
+	const change = customerMoney > 0 ? customerMoney : 0;// считаем сдачу
+	console.log(`Держите деньги ${price} грн`);
+	console.log(`Вот ваша сдача ${change} грн`);
+	console.log(`Вот ваш чек ${price} грн`);
 }
-
-
-cashInBuyer = buyProduct(cashRegister.applePrice, 'яблок(а)', 1, cashInBuyer);
-cashInBuyer = buyProduct(cashRegister.pearPrice, 'груш(у)', 1, cashInBuyer);
-cashInBuyer = buyProduct(cashRegister.breadPrice, 'буханок хлеба', 3, cashInBuyer);
-
-
-
+// пример использования функции buy
+buy('яблоко', 1);
+buy(`хлеб`,2)
+buy(`груша`, 1)

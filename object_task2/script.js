@@ -1,9 +1,9 @@
-let merchant = {
+let seller = {
 	apples: 10,
-	money: 0,
+	applePrice: 5,
 	sellApples(amount) {
 		this.apples -= amount;
-		this.money += amount * 5;
+		this.money += amount * this.applePrice;
 	}
 };
 
@@ -11,17 +11,18 @@ let buyer = {
 	money: 50,
 	apples: 0,
 	buyApples(amount) {
-		let cost = amount * 5;
+		let cost = amount * seller.applePrice;
 		if (this.money < cost) {
-			return console.log("У покупателя недостаточно денег");
+			console.log("Недостаточно денег!");
+			return;
 		}
 		this.money -= cost;
 		this.apples += amount;
-		merchant.sellApples(amount);
-		console.log(`Покупатель купил ${amount} яблок за ${cost} грн`);
+		seller.sellApples(amount);
+		console.log(`Куплено ${amount} яблок за ${cost} грн`);
 	}
 };
 
-buyer.buyApples(1);
-console.log(`Осталось ${merchant.apples} яблока у торговца`);
-console.log(`У покупателя осталось ${buyer.money} грн`);
+buyer.buyApples(7);
+console.log(`Осталось ${seller.apples} яблок у продавца`);
+console.log(`Осталось ${buyer.money} грн у покупателя`);

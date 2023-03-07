@@ -1,29 +1,18 @@
-const Max_Gold = 100
-const Low_Gold = 0
-
 let person1 = {
-	name:"Ruslan",
-	gold:`${Max_Gold}`
-}
+	name: "Руслан",
+	gold: 10
+};
 
 let person2 = {
-	name:"Sergey",
-	gold:`${Low_Gold}`
+	name: "Сергей",
+	gold: 0
+};
+
+function meet(person1, person2) {
+	person2.gold += person1.gold;
+	person1.gold = 0;
+	console.log(person1.name + " теперь не имеет золота");
+	console.log(person2.name + " теперь имеет " + person2.gold + " золота");
 }
 
-// Передаем золото от первого человека ко второму
-function transferGold(fromPerson, toPerson) {
-	toPerson.gold = fromPerson.gold,
-	fromPerson.gold = `${Low_Gold}`
-}
-
-// Проверяем начальное количество золота у каждого человека
-console.log(`${person1.name} имеет ${person1.gold} золота`);
-console.log(`${person2.name} имеет ${person2.gold} золота`);
-
-// Переводим золото
-transferGold(person1, person2)
-
-// Выводим конечное количество золота у каждого человека
-console.log(`${person1.name} имеет ${person1.gold} золота`);
-console.log(`${person2.name} имеет ${person2.gold} золота`);
+meet(person1, person2);
