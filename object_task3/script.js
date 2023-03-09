@@ -1,27 +1,60 @@
-const products = {
-  'яблоко': 5,
-  'груша': 7.5,
-  'хлеб': 4.3
+const cashier = {
+	money: 50,
+
+  // Метод для принятия товара и подсчета суммы покупки
+	acceptPayment: function(item, quantity) {
+		let price = 0;
+			switch(item) {
+			case 'яблоки':
+				price = 5;
+				break;
+			case 'груши':
+				price = 7.5;
+				break;
+			case 'хлеб':
+				price = 4.3;
+				break;
+			default:
+				console.log('Товар не найден');
+			return;
+		}
+
+		const total = price * quantity;
+		console.log(`Сумма покупки: ${total} грн`);
+
+		// Проверяем, достаточно ли денег у покупателя
+		if (total > buyer.money) {
+			console.log('У вас недостаточно денег');
+			return;
+		}
+
+		// Удаляем сумму покупки у покупателя
+		buyer.money -= total;
+
+		// Добавляем сумму покупки в кассу
+		this.money += total;
+
+		// Вычисляем сдачу и выводим ее в консоль
+		const change = buyer.money - total;
+		console.log(`Вот ваша сдача: ${change} грн`);
+
+		// Выводим чек
+		console.log(`Вот ваш чек: ${total} грн`);
+	}
 };
 
-let cashierMoney = 50;
-let customerMoney = 15;
+const buyer = {
+	money: 15,
 
-// функция для покупки
-function buy(product, quantity) {
-	const price = products[product] * quantity;// цена товаров
-		if (customerMoney < price) {
-				console.log('У вас недостаточно денег');
-				return;
+	// Метод для покупки товара
+	buy: function(item, quantity) {
+		console.log(`Держите деньги: ${this.money} грн`);
+		cashier.acceptPayment(item, quantity);
 	}
-	cashierMoney += price; // отнимаем деньги у покупателя
-	customerMoney -= price;// отнимаем деньги у покупателя
-	const change = customerMoney > 0 ? customerMoney : 0;// считаем сдачу
-	console.log(`Держите деньги ${price} грн`);
-	console.log(`Вот ваша сдача ${change} грн`);
-	console.log(`Вот ваш чек ${price} грн`);
-}
-// пример использования функции buy
-buy('яблоко', 1);
-buy(`хлеб`,2)
-buy(`груша`, 1)
+};
+
+buyer.buy('снюс', 2);
+buyer.buy('яблоки', 2);
+buyer.buy('хлеб', 1);
+buyer.buy(`хлеб`, 3)
+
